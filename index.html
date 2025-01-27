@@ -8,7 +8,7 @@
 </head>
 <body>
     <header>
-        <h1>Video Sharing Platform</h1>
+        <h1>TAYDOT WATCH</h1>
         <nav>
             <button id="upload-btn">+</button>
             <button id="profile-btn">Profile</button>
@@ -17,7 +17,8 @@
         </nav>
     </header>
     <main>
-        <section id="registration-section" style="display:none;">
+        <!-- Registration Section -->
+        <section id="registration-section">
             <h2>Register</h2>
             <form id="registration-form">
                 <label for="username">Username:</label>
@@ -27,6 +28,17 @@
                 <button type="submit">Register</button>
             </form>
         </section>
+
+        <!-- Profile Section -->
+        <section id="profile-section" style="display:none;">
+            <div class="profile">
+                <img src="default-profile.png" alt="Profile Picture" id="profile-picture">
+                <h2 id="profile-username">Username</h2>
+                <button id="edit-profile-btn">Edit Profile</button>
+            </div>
+        </section>
+
+        <!-- Upload Section -->
         <section id="upload-section" style="display:none;">
             <h2>Upload a Video</h2>
             <form id="upload-form">
@@ -39,10 +51,14 @@
                 <button type="submit">Upload</button>
             </form>
         </section>
+
+        <!-- Videos Section -->
         <section id="videos-section">
             <h2>Uploaded Videos</h2>
             <div id="videos"></div>
         </section>
+
+        <!-- Messages Section -->
         <section id="messages-section" style="display:none;">
             <h2>Messages & Comments</h2>
             <div id="messages"></div>
@@ -52,6 +68,8 @@
             </form>
         </section>
     </main>
+    <!-- Include Socket.io and custom scripts -->
+    <script src="/socket.io/socket.io.js"></script>
     <script src="scripts.js"></script>
 </body>
 </html>
