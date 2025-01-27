@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Sharing Platform</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Video Sharing Platform</h1>
+        <nav>
+            <button id="upload-btn">+</button>
+            <button id="profile-btn">Profile</button>
+            <button id="videos-btn">Videos</button>
+            <button id="messages-btn">Messages & Comments</button>
+        </nav>
+    </header>
+    <main>
+        <section id="registration-section" style="display:none;">
+            <h2>Register</h2>
+            <form id="registration-form">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+                <label for="phone">Phone Number:</label>
+                <input type="tel" id="phone" name="phone" required>
+                <button type="submit">Register</button>
+            </form>
+        </section>
+        <section id="upload-section" style="display:none;">
+            <h2>Upload a Video</h2>
+            <form id="upload-form">
+                <label for="title">Title:</label>
+                <input type="text" id="title" name="title" required>
+                <label for="description">Description:</label>
+                <textarea id="description" name="description" required></textarea>
+                <label for="video-file">Upload Video:</label>
+                <input type="file" id="video-file" name="video-file" accept="video/*" required>
+                <button type="submit">Upload</button>
+            </form>
+        </section>
+        <section id="videos-section">
+            <h2>Uploaded Videos</h2>
+            <div id="videos"></div>
+        </section>
+        <section id="messages-section" style="display:none;">
+            <h2>Messages & Comments</h2>
+            <div id="messages"></div>
+            <form id="message-form">
+                <input type="text" id="message-input" placeholder="Type a message" required>
+                <button type="submit">Send</button>
+            </form>
+        </section>
+    </main>
+    <script src="scripts.js"></script>
+</body>
+</html>
