@@ -1,0 +1,9 @@
+Future Improvements:
+
+Implement the Edit Profile and Messaging features fully.
+
+Enhance the Video Upload functionality to handle large files and different video formats.
+
+Add authentication and security measures to protect user data.
+
+Implement error messages and loading indicators for better user experience.
