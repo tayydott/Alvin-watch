@@ -54,4 +54,22 @@
 
         <!-- Videos Section -->
         <section id="videos-section">
-            <h[_{{{CITATION{{{_1{](https://github.com/frame00/oo-elements/tree/cb23701ba21686c12ecca8d856a08f83c7e58000/.github%2FCONTRIBUTING.md)
+            <h2>Uploaded Videos</h2>
+            <div id="videos"></div>
+        </section>
+
+        <!-- Messages Section -->
+        <section id="messages-section" style="display:none;">
+            <h2>Messages & Comments</h2>
+            <div id="messages"></div>
+            <form id="message-form">
+                <input type="text" id="message-input" placeholder="Type a message" required>
+                <button type="submit">Send</button>
+            </form>
+        </section>
+    </main>
+    <!-- Include Socket.io and custom scripts -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="scripts.js"></script>
+</body>
+</html>
