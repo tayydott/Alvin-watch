@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
         alert('Edit Profile feature coming soon!');
     });
 
-    // Upload form submission (using Stocker.io)
+    // Upload form submission (using Socket.io)
     const uploadForm = document.getElementById('upload-form');
     uploadForm.addEventListener('submit', async event => {
         event.preventDefault();
@@ -86,9 +86,9 @@ document.addEventListener('DOMContentLoaded', () => {
             formData.append('description', description);
 
             try {
-                // Upload video to Stocker.io
-                const response = await uploadToStocker(formData);
-                console.log('Uploaded to Stocker.io:', response);
+                // Upload video to Socket.io
+                const response = await uploadToSocket(formData);
+                console.log('Uploaded to Socket.io:', response);
 
                 // Add to gallery
                 addVideoToGallery({
@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 uploadForm.reset();
                 showSection('videos');
             } catch (error) {
-                console.error('Error uploading to Stocker.io:', error);
+                console.error('Error uploading to Socket.io:', error);
             }
         }
     });
@@ -169,8 +169,8 @@ document.addEventListener('DOMContentLoaded', () => {
         messageList.scrollTop = messageList.scrollHeight;
     });
 
-    // Load existing videos from Stocker.io
-    async function loadVideosFromStocker() {
+    // Load existing videos from Socket.io
+    async function loadVideosFromSocket() {
         try {
             const videos = await fetchAllFiles();
             videos.forEach(video => {
@@ -182,11 +182,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             });
         } catch (error) {
-            console.error('Error loading videos from Stocker.io:', error);
+            console.error('Error loading videos from Socket.io:', error);
         }
     }
 
     // Initialize application
-    loadVideosFromStocker();
+    loadVideosFromSocket();
     updateProfile();
 });
