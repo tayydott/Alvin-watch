@@ -68,13 +68,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // Edit profile button
     const editProfileBtn = document.getElementById('edit-profile-btn');
     editProfileBtn.addEventListener('click', () => {
-        // Logic to edit profile (e.g., open a modal)
         alert('Edit Profile feature coming soon!');
     });
 
-    // Upload form submission
+    // Upload form submission (using Stocker.io)
     const uploadForm = document.getElementById('upload-form');
-    uploadForm.addEventListener('submit', event => {
+    uploadForm.addEventListener('submit', async event => {
         event.preventDefault();
         const title = document.getElementById('title').value;
         const description = document.getElementById('description').value;
@@ -82,22 +81,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (videoFile) {
             const formData = new FormData();
-            formData.append('video', videoFile);
+            formData.append('file', videoFile);
             formData.append('title', title);
             formData.append('description', description);
 
-            // Upload video to server
-            fetch('/upload', {
-                method: 'POST',
-                body: formData,
-            })
-                .then(res => res.json())
-                .then(data => {
-                    addVideoToGallery(data);
-                    uploadForm.reset();
-                    showSection('videos');
-                })
-                .catch(err => console.error(err));
+            try {
+                // Upload video to Stocker.io
+                const response = await uploadToStocker(formData);
+                console.log('Uploaded to Stocker.io:', response);
+
+                // Add to gallery
+                addVideoToGallery({
+                    id: response.id,
+                    title: response.title,
+                    description: response.description,
+                    videoURL: response.url,
+                });
+
+                uploadForm.reset();
+                showSection('videos');
+            } catch (error) {
+                console.error('Error uploading to Stocker.io:', error);
+            }
         }
     });
 
@@ -136,7 +141,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Open chat interface with comments
     function openChatWithComments(videoId) {
-        // Logic to open chat interface for specific video comments
         alert(`Messaging feature for video ${videoId} coming soon!`);
     }
 
@@ -165,17 +169,24 @@ document.addEventListener('DOMContentLoaded', () => {
         messageList.scrollTop = messageList.scrollHeight;
     });
 
-    // Load existing videos from server
-    function loadVideos() {
-        fetch('/videos')
-            .then(res => res.json())
-            .then(videos => {
-                videos.forEach(video => addVideoToGallery(video));
-            })
-            .catch(err => console.error(err));
+    // Load existing videos from Stocker.io
+    async function loadVideosFromStocker() {
+        try {
+            const videos = await fetchAllFiles();
+            videos.forEach(video => {
+                addVideoToGallery({
+                    id: video.id,
+                    title: video.metadata.title || 'Untitled',
+                    description: video.metadata.description || '',
+                    videoURL: video.url,
+                });
+            });
+        } catch (error) {
+            console.error('Error loading videos from Stocker.io:', error);
+        }
     }
 
     // Initialize application
-    loadVideos();
+    loadVideosFromStocker();
     updateProfile();
 });
